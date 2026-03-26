@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2025-04-28T00:00:00Z"
+          product-name="tw_viewhelpers">
+        <header />
+        <body>
+            <trans-unit id="page.lastUpdate">
+                <source>Last update</source>
+                <target>Letzte Änderung</target>
+            </trans-unit>
+            <trans-unit id="page.lastUpdate.pageIdAndDate">
+                <source>Seite %s, zuletzt geändert:</source>
+            </trans-unit>
+            <trans-unit id="page.changed.date.pattern">
+                <source>EEEE, MMMM dd, YYYY</source>
+                <source>EEEE, dd. MMMM YYYY</source>
+            </trans-unit>
+            <trans-unit id="page.changed.date.locale">
+                <source>en-EN</source>
+                <target>de-DE</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

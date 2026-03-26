@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * InlineSvgViewHelper
+ *
+ * @category   Tollwerk
+ * @package    Tollwerk\TwViewhelpers
+ * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
+ * @author     tollwerk GmbH <info@tollwerk.de>
+ * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
+ * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @link       https://tollwerk.de
+ */
+
+namespace Tollwerk\TwViewhelpers\ViewHelpers\Image;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Closure;
+
+/**
+ * Render SVG file object as inline SVG code
+ *
+ * @category   Tollwerk
+ * @package    Tollwerk\TwViewhelpers
+ * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
+ * @author     tollwerk GmbH <info@tollwerk.de>
+ * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @link       https://tollwerk.de
+ */
+class InlineSvgViewHelper extends AbstractViewHelper
+{
+    /**
+     * Don't escape HTML output
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
+     * Initialize all arguments. You need to override this method and call
+     * $this->registerArgument(...) inside this method, to register all your arguments.
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('file', 'mixed', 'SVG file', false, null);
+    }
+
+    /**
+     * Return xml content, stripping the outer <xml> tag.
+     *
+     * @param string $fileContent File content
+     *
+     * @return array|string|string[]|null
+     */
+    public static function returnXmlContent(string $fileContent = '')
+    {
+        return preg_replace('/<\?xml(.*)>/', '', $fileContent);
+    }
+
+    /**
+     * Default implementation of static rendering; useful API method if your ViewHelper
+     * when compiled is able to render itself statically to increase performance. This
+     * default implementation will simply delegate to the ViewHelperInvoker.
+     *
+     * @param array<string, mixed>      $arguments             Arguments
+     * @param Closure                   $renderChildrenClosure RenderChildrenClosure
+     * @param RenderingContextInterface $renderingContext      RenderingContext
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
+     * @return mixed
+     */
+    public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    {
+        // Get file or return null if not set.
+        if ($arguments['file'] === null) {
+            return '';
+        }
+        $file = $arguments['file'];
+
+        // Return file content of Extbase File Reference.
+        if ($file instanceof FileReference) {
+            return self::returnXmlContent($file->getOriginalResource()->getContents());
+        }
+
+        // Return file content of TYPO3 Core File Reference.
+        if ($file instanceof CoreFileReference) {
+            return self::returnXmlContent($file->getContents());
+        }
+
+        // Return comment when file is not supported.
+        return '<!-- InlineSvgViewHelper: Could not render SVG -->';
+    }
+}
