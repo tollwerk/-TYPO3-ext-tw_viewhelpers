@@ -101,7 +101,7 @@ class HeadingContextManager implements SingletonInterface
             if (($level - $this->currentLevel) > 1) {
                 $error = true;
 
-                if (!empty($GLOBALS['TSFE'])) {
+                if (!empty($GLOBALS['TYPO3_REQUEST'])) {
                     /**
                      * Logger
                      *
@@ -111,7 +111,7 @@ class HeadingContextManager implements SingletonInterface
                     $logger->warning(
                         sprintf(
                             'Page %s: skipping headline level(s) %s',
-                            $GLOBALS['TSFE']->id,
+                            $GLOBALS['TYPO3_REQUEST']->get('frontend.page.information')->getId(),
                             implode(', ', range(max(1, $this->currentLevel) + 1, $level - 1))
                         )
                     );
