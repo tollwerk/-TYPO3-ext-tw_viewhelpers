@@ -78,7 +78,7 @@ class HeadingViewHelper extends AbstractTagBasedViewHelper
                 'Heading Heading--' . $headingContext->getVisualType(),
                 $headingContext->isError() ? 'Heading--semantic-error' : '',
                 $headingContext->isHidden() ? 'Heading--hidden' : '',
-                    ($this->arguments['class']) ? trim($this->arguments['class']) : ''
+                    !empty($this->arguments['class']) ? trim($this->arguments['class']) : ''
                 ]
             )
         );

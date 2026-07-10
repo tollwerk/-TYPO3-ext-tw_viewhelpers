@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Heading context manager
@@ -88,7 +89,7 @@ class HeadingContextManager implements SingletonInterface
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @codingStandardsIgnoreStart
      */
-    public function setupContext(int $level = null, int $visualType = null, string $content = ''): HeadingContext
+    public function setupContext(?int $level = null, ?int $visualType = null, string $content = ''): HeadingContext
     {
         $level      = intval($level);
         $afterLevel = max(1, $this->currentLevel);
@@ -111,7 +112,7 @@ class HeadingContextManager implements SingletonInterface
                     $logger->warning(
                         sprintf(
                             'Page %s: skipping headline level(s) %s',
-                            $GLOBALS['TYPO3_REQUEST']->get('frontend.page.information')->getId(),
+                            $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.page.information')->getId(),
                             implode(', ', range(max(1, $this->currentLevel) + 1, $level - 1))
                         )
                     );
@@ -194,7 +195,7 @@ class HeadingContextManager implements SingletonInterface
      *
      * @return int Next level
      */
-    public function getNextLevel(int $level = null): int
+    public function getNextLevel(?int $level = null): int
     {
         $level = intval($level);
         $level = ($level >= 100) ? 0 : $level;
