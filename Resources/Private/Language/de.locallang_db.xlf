@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-07-10T12:00:00Z"
+          product-name="tw_viewhelpers">
+        <header/>
+        <body>
+            <trans-unit id="ext_conf_template.enable_log">
+                <source>Enable log:When enabled, warnings and errors will be written to the TYPO3 log file. Please disable in productive environments.</source>
+                <target>Log aktivieren:Wenn aktiviert, werden Warn- und Fehlermeldungen in die TYPO3-Logdatei geschrieben. Bitte in Produktivumgebungen deaktivieren.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
