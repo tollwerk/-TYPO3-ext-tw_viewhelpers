@@ -14,6 +14,7 @@
 
 namespace Tollwerk\TwViewhelpers\ViewHelpers\Page;
 
+use Psr\Http\Message\ServerRequestInterface;
 use Tollwerk\TwViewhelpers\Service\PageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -34,6 +35,20 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class LastUpdateViewHelper extends AbstractViewHelper
 {
     /**
+     * Get Request
+     *
+     * @return ServerRequestInterface|null
+     */
+    private function getRequest(): ServerRequestInterface|null
+    {
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            return $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        return null;
+    }
+
+
+    /**
      * InitializeArguments
      *
      * @return void
@@ -43,6 +58,8 @@ class LastUpdateViewHelper extends AbstractViewHelper
         parent::initializeArguments();
         $this->registerArgument('page', 'int', 'UID of the desired page', false, null);
     }
+
+
 
     /**
      * RenderStatic
@@ -55,12 +72,12 @@ class LastUpdateViewHelper extends AbstractViewHelper
      *
      * @return array
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): array
+    public function render(): array
     {
         // Get UID of current page.
-        $pageUid = $arguments['page'];
+        $pageUid = $this->arguments['page'];
         if ($pageUid === null) {
-            $pageUid = $renderingContext->getRequest()->getAttribute('routing')->getPageId();
+            $pageUid = $this->renderingContext->getRequest()->getAttribute('routing')->getPageId();
         }
         return GeneralUtility::makeInstance(PageService::class)->getLastUpdate($pageUid);
     }

@@ -1,0 +1,2 @@
+# cat=General; type=boolean; label=LLL:EXT:tw_viewhelpers/Resources/Private/Language/locallang_db.xlf:ext_conf_template.enable_log
+enable_log = 0

@@ -7,13 +7,14 @@
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\Heading
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
+ * @copyright  2026 tollwerk Gmbh <info@tollwerk.de>
  * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
  * @link       https://tollwerk.de
  */
 
 namespace Tollwerk\TwViewhelpers\Heading;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -55,25 +56,44 @@ class HeadingContextManager implements SingletonInterface
      *
      * @var int
      */
-    protected $currentLevel = 0;
+    protected int $currentLevel = 0;
     /**
      * Current headline type
      *
      * @var int
      */
-    protected $currentType = 0;
+    protected int $currentType = 0;
     /**
      * Maximum rendered level
      *
      * @var int
      */
-    protected $maxLevel = 0;
+    protected int $maxLevel = 0;
     /**
      * Heading contexts
      *
      * @var HeadingContext[]
      */
-    protected $contexts = [];
+    protected array $contexts = [];
+
+    /**
+     * ExtensionConfiguration
+     *
+     * @var array
+     */
+    protected array $extensionConfiguration;
+
+    /**
+     * Constructor
+     *
+     * @param ExtensionConfiguration $extensionConfiguration
+     */
+    public function __construct()
+    {
+        $this->extensionConfiguration = GeneralUtility::makeInstance(
+            ExtensionConfiguration::class
+        )->get('tw_viewhelpers');
+    }
 
     /**
      * Set up a new headline context
@@ -88,7 +108,7 @@ class HeadingContextManager implements SingletonInterface
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @codingStandardsIgnoreStart
      */
-    public function setupContext(int $level = null, int $visualType = null, string $content = ''): HeadingContext
+    public function setupContext(?int $level = null, ?int $visualType = null, string $content = ''): HeadingContext
     {
         $level      = intval($level);
         $afterLevel = max(1, $this->currentLevel);
@@ -100,21 +120,22 @@ class HeadingContextManager implements SingletonInterface
             // If headline levels are skipped: Warning
             if (($level - $this->currentLevel) > 1) {
                 $error = true;
-
-                if (!empty($GLOBALS['TSFE'])) {
-                    /**
-                     * Logger
-                     *
-                     * @var Logger $logger
-                     */
-                    $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
-                    $logger->warning(
-                        sprintf(
-                            'Page %s: skipping headline level(s) %s',
-                            $GLOBALS['TSFE']->id,
-                            implode(', ', range(max(1, $this->currentLevel) + 1, $level - 1))
-                        )
-                    );
+                if (!empty($GLOBALS['TYPO3_REQUEST'])) {
+                    if ((int) $this->extensionConfiguration['enable_log']) {
+                        /**
+                         * Logger
+                         *
+                         * @var Logger $logger
+                         */
+                        $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+                        $logger->warning(
+                            sprintf(
+                                'Page %s: skipping headline level(s) %s',
+                                $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.page.information')->getId(),
+                                implode(', ', range(max(1, $this->currentLevel) + 1, $level - 1))
+                            )
+                        );
+                    }
                 }
             }
 
@@ -194,7 +215,7 @@ class HeadingContextManager implements SingletonInterface
      *
      * @return int Next level
      */
-    public function getNextLevel(int $level = null): int
+    public function getNextLevel(?int $level = null): int
     {
         $level = intval($level);
         $level = ($level >= 100) ? 0 : $level;

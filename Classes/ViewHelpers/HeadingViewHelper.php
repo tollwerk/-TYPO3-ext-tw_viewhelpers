@@ -45,7 +45,6 @@ class HeadingViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
         $this->registerArgument('level', 'int', 'Heading level', false, null);
         $this->registerArgument('type', 'string', 'Visual type', false, null);
         $this->registerArgument('content', 'string', 'Heading content', true);
@@ -79,7 +78,7 @@ class HeadingViewHelper extends AbstractTagBasedViewHelper
                 'Heading Heading--' . $headingContext->getVisualType(),
                 $headingContext->isError() ? 'Heading--semantic-error' : '',
                 $headingContext->isHidden() ? 'Heading--hidden' : '',
-                    ($this->arguments['class']) ? trim($this->arguments['class']) : ''
+                    !empty($this->arguments['class']) ? trim($this->arguments['class']) : ''
                 ]
             )
         );

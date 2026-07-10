@@ -14,11 +14,8 @@
 
 namespace Tollwerk\TwViewhelpers\ViewHelpers\Link;
 
-use Tollwerk\TwViewhelpers\Service\PageService;
 use TYPO3\CMS\Core\LinkHandling\TypoLinkCodecService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -47,18 +44,14 @@ class TypolinkInfoViewHelper extends AbstractViewHelper
     /**
      * RenderStatic
      *
-     * @param array                     $arguments             Arguments
-     * @param \Closure                  $renderChildrenClosure Closure
-     * @param RenderingContextInterface $renderingContext      RenderingContext
-     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
      * @return array
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): array
+    public function render(): array
     {
         return GeneralUtility::makeInstance(
             TypoLinkCodecService::class
-        )->decode($arguments['typolink']);
+        )->decode($this->arguments['typolink']);
     }
 }
