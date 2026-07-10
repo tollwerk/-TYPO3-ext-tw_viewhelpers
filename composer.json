@@ -16,7 +16,7 @@
     ],
     "homepage": "https://tollwerk.de",
     "support": {
-        "issues": "https://tollwerk.de"
+        "issues": "https://github.com/tollwerk/-TYPO3-ext-tw_viewhelpers/issues"
     },
     "require": {
         "php": ">= 8.2",
