@@ -14,13 +14,9 @@
 
 namespace Tollwerk\TwViewhelpers\ViewHelpers\Image;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use Closure;
 
 /**
  * Render SVG file object as inline SVG code
@@ -72,21 +68,17 @@ class InlineSvgViewHelper extends AbstractViewHelper
      * when compiled is able to render itself statically to increase performance. This
      * default implementation will simply delegate to the ViewHelperInvoker.
      *
-     * @param array<string, mixed>      $arguments             Arguments
-     * @param Closure                   $renderChildrenClosure RenderChildrenClosure
-     * @param RenderingContextInterface $renderingContext      RenderingContext
-     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return mixed
+     * @return string
      */
-    public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public function render(): string
     {
         // Get file or return null if not set.
-        if ($arguments['file'] === null) {
+        if ($this->arguments['file'] === null) {
             return '';
         }
-        $file = $arguments['file'];
+        $file = $this->arguments['file'];
 
         // Return file content of Extbase File Reference.
         if ($file instanceof FileReference) {
