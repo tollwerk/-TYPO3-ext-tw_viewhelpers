@@ -49,6 +49,7 @@ class HeadingViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('type', 'string', 'Visual type', false, null);
         $this->registerArgument('content', 'string', 'Heading content', true);
         $this->registerArgument('restoreContext', 'boolean', 'Restore the heading context', false, true);
+        $this->registerArgument('class', 'string', 'CSS Class', false, '');
     }
 
     /**
