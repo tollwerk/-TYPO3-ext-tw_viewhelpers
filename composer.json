@@ -2,7 +2,7 @@
     "name": "tollwerk/tw-viewhelpers",
     "type": "typo3-cms-extension",
     "description": "Collection of useful ViewHelpers",
-    "license": "LGPL-3.0-or-later",
+    "license": "MIT",
     "keywords": [
         "typo3"
     ],
@@ -19,9 +19,9 @@
         "issues": "https://github.com/tollwerk/-TYPO3-ext-tw_viewhelpers/issues"
     },
     "require": {
-        "php": ">= 8.2",
-        "typo3/cms-core": "^13",
-        "typo3/cms-fluid-styled-content": "^13"
+        "php": ">= 8.3",
+        "typo3/cms-core": "^14",
+        "typo3/cms-fluid-styled-content": "^14"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +33,7 @@
             "extension-key": "tw_viewhelpers"
         },
         "branch-alias": {
-            "dev-master": "13.0.x-dev"
+            "dev-master": "14.0.x-dev"
         }
     }
 }

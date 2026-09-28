@@ -8,7 +8,7 @@
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers
  * @author     tollwerk GmbH <info@tollwerk.de>
  * @copyright  2025 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
@@ -16,6 +16,7 @@ namespace Tollwerk\TwViewhelpers\ViewHelpers\Link;
 
 use TYPO3\CMS\Core\LinkHandling\TypoLinkCodecService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -25,7 +26,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class TypolinkInfoViewHelper extends AbstractViewHelper
@@ -35,7 +36,7 @@ class TypolinkInfoViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('typolink', 'string', 'The typolink', true);

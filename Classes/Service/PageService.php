@@ -7,7 +7,7 @@
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\Service
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Utility\RootlineUtility;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\Service
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class PageService

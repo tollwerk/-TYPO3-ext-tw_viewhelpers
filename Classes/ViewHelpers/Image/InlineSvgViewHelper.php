@@ -7,13 +7,14 @@
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @copyright  2026 tollwerk Gmbh <info@tollwerk.de>
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
 namespace Tollwerk\TwViewhelpers\ViewHelpers\Image;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -25,7 +26,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class InlineSvgViewHelper extends AbstractViewHelper
@@ -45,10 +46,10 @@ class InlineSvgViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('file', 'mixed', 'SVG file', false, null);
+        $this->registerArgument('file', 'mixed', 'SVG file as FileReference, CoreFileRefer or file path as string', false, null);
     }
 
     /**
@@ -90,7 +91,15 @@ class InlineSvgViewHelper extends AbstractViewHelper
             return self::returnXmlContent($file->getContents());
         }
 
+        // If file is a string, try to resolve the path and get the file contents directly.
+        if (is_string($file)) {
+            $absFilePath = GeneralUtility::getFileAbsFileName($file);
+            if ($absFilePath !== '' && is_file($absFilePath)) {
+                return file_get_contents($absFilePath);
+            }
+        }
+
         // Return comment when file is not supported.
-        return '<!-- InlineSvgViewHelper: Could not render SVG -->';
+        return "<!-- InlineSvgViewHelper: Could not render SVG for $file -->";
     }
 }

@@ -7,7 +7,7 @@
  * @package   Tollwerk\TwViewhelpers
  * @author    tollwerk GmbH <info@tollwerk.de>
  * @copyright 2024 tollwerk GmbH <info@tollwerk.de>
- * @license   GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      https://tollwerk.de
  */
 

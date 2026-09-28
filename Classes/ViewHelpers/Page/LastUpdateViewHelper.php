@@ -8,7 +8,7 @@
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers
  * @author     tollwerk GmbH <info@tollwerk.de>
  * @copyright  2025 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
@@ -29,7 +29,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class LastUpdateViewHelper extends AbstractViewHelper
@@ -53,7 +53,7 @@ class LastUpdateViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('page', 'int', 'UID of the desired page', false, null);
