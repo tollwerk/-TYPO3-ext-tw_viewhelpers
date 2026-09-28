@@ -7,8 +7,8 @@
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @copyright  2026 tollwerk Gmbh <info@tollwerk.de>
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
@@ -17,7 +17,6 @@ namespace Tollwerk\TwViewhelpers\ViewHelpers\Image;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -27,7 +26,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\ViewHelpers\Image
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class InlineSvgViewHelper extends AbstractViewHelper

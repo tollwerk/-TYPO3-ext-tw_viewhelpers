@@ -7,8 +7,8 @@
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\Heading
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @copyright  2026 tollwerk Gmbh <info@tollwerk.de>
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 
@@ -21,8 +21,8 @@ namespace Tollwerk\TwViewhelpers\Heading;
  * @package    Tollwerk\TwViewhelpers
  * @subpackage Tollwerk\TwViewhelpers\Heading
  * @author     tollwerk GmbH <info@tollwerk.de>
- * @copyright  2024 tollwerk Gmbh <info@tollwerk.de>
- * @license    GPL https://www.gnu.org/licenses/gpl-3.0.html.en
+ * @copyright  2026 tollwerk Gmbh <info@tollwerk.de>
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link       https://tollwerk.de
  */
 class HeadingContext
