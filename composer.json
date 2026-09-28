@@ -2,7 +2,7 @@
     "name": "tollwerk/tw-viewhelpers",
     "type": "typo3-cms-extension",
     "description": "Collection of useful ViewHelpers",
-    "license": "LGPL-3.0-or-later",
+    "license": "MIT",
     "keywords": [
         "typo3"
     ],
