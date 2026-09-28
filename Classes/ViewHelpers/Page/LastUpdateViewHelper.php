@@ -53,7 +53,7 @@ class LastUpdateViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('page', 'int', 'UID of the desired page', false, null);
