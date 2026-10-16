@@ -14,6 +14,7 @@
 
 namespace Tollwerk\TwViewhelpers\ViewHelpers\Image;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -90,7 +91,15 @@ class InlineSvgViewHelper extends AbstractViewHelper
             return self::returnXmlContent($file->getContents());
         }
 
+        // If file is a string, try to resolve the path and get the file contents directly.
+        if (is_string($file)) {
+            $absFilePath = GeneralUtility::getFileAbsFileName($file);
+            if ($absFilePath !== '' && is_file($absFilePath)) {
+                return file_get_contents($absFilePath);
+            }
+        }
+
         // Return comment when file is not supported.
-        return '<!-- InlineSvgViewHelper: Could not render SVG -->';
+        return "<!-- InlineSvgViewHelper: Could not render SVG for $file -->";
     }
 }
